@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+</body>
+<script>
+    // 初始化参数
+    var speed = 55;
+    //var texts = '0123456789'.split('');
+    var texts = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわを '.split('');
+    var fontSize = 16;
+
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+
+    //用于计算输出文字时坐标, 所以长度及列数
+    var columns = canvas.width/fontSize;
+
+    //初始化
+    var drops = [];
+    for (var x = 0;x<columns; x++){
+        drops[x] = 1;
+    }
+
+    function draw() {
+        //让背景色逐渐由透明到不透明
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillRect(0,0,canvas.width, canvas.height); // 填充矩形
+        //文字颜色 填充 1
+        //ctx.fillStyle = '#0f0';
+        //文字颜色 填充 2
+        var gradient = ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","#0f0");
+        gradient.addColorStop("1.0","red");
+        ctx.fillStyle = gradient;
+        ctx.font = fontSize+'px arial';
+        //逐行输出文字
+        for (var i =0;i<drops.length;i++){
+            var text = texts[Math.floor(Math.random()*texts.length)];
+            ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+            if(drops[i]*fontSize > canvas.height || Math.random() >0.95){
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    setInterval(draw, speed);
+</script>
+</html>
