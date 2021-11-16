@@ -1,10 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-"""
-@author:shana
-@file:__init__.py
-@time:2021/11/15
-"""
-
-if __name__ == '__main__':
-    pass
+# @Time     :2021/11/16 10:28
+# @Author   :shana
+# @File     :__init__.py

@@ -1,10 +1,16 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-"""
-@author:shana
-@file:__init__.py
-@time:2021/11/15
-"""
+# @Time     :2021/11/16 13:46
+# @Author   :shana
+# @File     :__init__.py
+from pecan import rest
 
-if __name__ == '__main__':
-    pass
+from pecan_demo.api.v1.controllers import demo as demo_api
+
+
+class V1Controller(rest.RestController):
+    """API version 1 controller.
+
+    """
+
+    demo = demo_api.DemoController()

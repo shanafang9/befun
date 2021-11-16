@@ -1,10 +1,20 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-"""
-@author:shana
-@file:setup.py
-@time:2021/11/15
-"""
+# -*- coding: utf-8 -*-
 
-if __name__ == '__main__':
-    pass
+from setuptools import find_packages, setup
+
+setup(
+    name='pecan_demo',
+    version='0.1',
+    packages=find_packages(),
+    package_data={
+        'pecan_demo': [
+            'common/db/alembic/alembic.ini'
+            'db/sqlalchemy/alembic',
+            'db/sqlalchemy/alembic/versions',
+            'db/sqlalchemy/alembic/versions/c6040f85e16e_initial_migration.py',
+            'db/sqlalchemy/alembic/env.py',
+            'db/sqlalchemy/alembic/README',
+            'db/sqlalchemy/alembic/script.py.mako',
+        ],
+    }
+)

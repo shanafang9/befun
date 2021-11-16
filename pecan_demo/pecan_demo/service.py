@@ -31,19 +31,16 @@ cfg.CONF.register_opts(service_opts)
 def prepare_service(argv=None, config_files=None):
     if argv is None:
         argv = sys.argv
-    #
-    # if conf is None:
-    #     conf = cfg.ConfigOpts()
 
     oslo_i18n.enable_lazy()
     log.register_options(cfg.CONF)
     log.set_defaults()
     defaults.set_cors_middleware_defaults()
 
-    cfg.CONF(argv[1:], project='pecan_gai', validate_default_values=True,
-         version=version.version_info.version_string(),
-         default_config_files=config_files)
+    cfg.CONF(argv[1:], project='pecan_demo', validate_default_values=True,
+             version=version.version_info.version_string(),
+             default_config_files=config_files)
 
-    log.setup(cfg.CONF, 'pecan_gai')
+    log.setup(cfg.CONF, 'pecan_demo')
     messaging.setup()
     return cfg.CONF
