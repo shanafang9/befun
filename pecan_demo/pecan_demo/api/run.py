@@ -5,9 +5,11 @@
 # @File     :run.py
 from wsgiref import simple_server
 from pecan_demo.api import app
-
+# import pdb
+# pdb.set_trace()
 application = app.build_wsgi_app(argv=[])
-print(type(application))
+
+# print(type(application))
 
 
 if __name__ == '__main__':
