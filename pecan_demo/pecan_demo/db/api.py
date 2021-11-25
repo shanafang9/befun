@@ -40,24 +40,24 @@ class Demo(object):
     """Base class for demo managing"""
 
     @abc.abstractmethod
-    def get_demo(self, uuid):
+    def get_demo(self, _uuid):
         """Return a field object."""
 
-    @abc.abstractmethod
-    def list_demos(self):
-        """Return an detail list fo every demo."""
+    # @abc.abstractmethod
+    # def list_demos(self):
+    #     """Return an detail list fo every demo."""
 
     @abc.abstractmethod
     def create_demo(self, name, desc, del_flag):
         """Create a new demo."""
 
-    @abc.abstractmethod
-    def update_demo(self, uuid):
-        """Update a demo."""
+    # @abc.abstractmethod
+    # def update_demo(self, uuid):
+    #     """Update a demo."""
 
-    @abc.abstractmethod
-    def delete_demo(self, uuid):
-        """delete a demo."""
+    # @abc.abstractmethod
+    # def delete_demo(self, uuid):
+    #     """delete a demo."""
 
 
 """
@@ -85,7 +85,7 @@ class ApiDemoError(BaseDemoError):
 class NoSuchDemo(ApiDemoError):
     """Raised when the demo doesn't exist."""
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(NoSuchDemo, self).__init__(
             "No demo for search: %s" % uuid)
         self.uuid = uuid

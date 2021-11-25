@@ -13,4 +13,5 @@ class V1Controller(rest.RestController):
 
     """
 
-    demo = demo_api.DemoController()
+    # demo = demo_api.DemoController()
+    demo = demo_api.TestController()

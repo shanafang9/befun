@@ -5,11 +5,12 @@
 # @File     :models.py
 import sqlalchemy
 from sqlalchemy.ext import declarative
+from oslo_db.sqlalchemy import models
 
 Base = declarative.declarative_base()
 
 
-class Demo(Base):
+class Demo(Base, models.ModelBase):
     """Demo"""
     __table_args__ = {'mysql_charset': "utf8",
                       'mysql_engine': "InnoDB"}
@@ -24,12 +25,17 @@ class Demo(Base):
                              nullable=True)  # 描述
     name = sqlalchemy.Column(sqlalchemy.String(255),
                              nullable=False)  # 名称
+
+    create_dt = sqlalchemy.Column(sqlalchemy.DateTime,
+                                  nullable=False)
+    update_dt = sqlalchemy.Column(sqlalchemy.DateTime,
+                                  nullable=False)
     del_flag = sqlalchemy.Column(sqlalchemy.String(10),
                                  nullable=True)
 
     def __repr__(self):
         return ('<Demo[{name}]: '
-                'order_id={demo_id}>').format(
+                'demo_id={demo_id}>').format(
             name=self.name,
             demo_id=self.demo_id)
 
