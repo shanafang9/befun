@@ -9,6 +9,7 @@ import pecan
 from pecan import rest
 import wsmeext.pecan as wsme_pecan
 
+from pecan_demo.common import policy
 from pecan_demo.db import api as db_api
 from pecan_demo.api.v1 import types as _types
 from pecan_demo.api.v1.datamodels import demo as demo_schema
@@ -35,22 +36,25 @@ class TestController(rest.RestController):
                          status_code=200)
     def get(self, uuid):
         try:
+            # 权限校验: 不做限制
+            policy.authorize(pecan.request.context, 'demo:get_demo', {})
+
             demo = self._db.get_demo(uuid)
             return demo_schema.DemoModel(**demo.as_dict())
         except Exception as e:
             pecan.abort(400, six.text_type(e))
-            pass
-        # return 'get'
 
     @wsme_pecan.wsexpose(demo_schema.DemoModel,
                          body=demo_schema.DemoModel,
                          status_code=201)
     def post(self, demo_body):
         try:
+            # 权限校验: 仅管理员可创建
+            policy.authorize(pecan.request.context, 'demo:create_demo', {})
+
             demo = self._db.create_demo(
                 name=demo_body.name,
                 desc=demo_body.desc)
             return demo_schema.DemoModel(**demo.as_dict())
         except Exception as e:
             pecan.abort(400, six.text_type(e))
-        # return 'post'
