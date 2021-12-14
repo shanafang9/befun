@@ -73,7 +73,7 @@ def _serialize_rules(rules):
 def authorize(context, action, target):
     """Verifies that the action is valid on the target in this context.
 
-       :param context: cloudkitty context
+       :param context: pecan_demo context
        :param action: string representing the action to be checked
            this should be colon separated for clarity.
            i.e. ``compute:create_instance``,
@@ -88,8 +88,9 @@ def authorize(context, action, target):
 
         :example: policy.authorize(pecan.request.context, 'report:get_total',
                                     {"tenant_id": tenant_id})
-                C:\python_pj\openstack_\cloudkitty-stable-rocky\cloudkitty\common\policies\report.py
-                C:\Users\admin\AppData\Local\conda\conda\envs\pytest27\Lib\site-packages\oslo_policy\policy.py -> authorize()
+                \pecan_demo\api\v1\controllers\demo.py
+                \pecan_demo\common\policies\demo.py
+                \conda\envs\pytest27\Lib\site-packages\oslo_policy\policy.py -> authorize()
     """
     if CONF.auth_strategy != "keystone":
         return
@@ -138,7 +139,7 @@ def register_rules(enforcer):
 def get_enforcer():
     # This method is for use by oslopolicy CLI scripts. Those scripts need the
     # 'output-file' and 'namespace' options, but having those in sys.argv means
-    # loading the Cloudkitty config options will fail as those are not expected
+    # loading the pecan_demo config options will fail as those are not expected
     # to be present. So we pass in an arg list with those stripped out.
     conf_args = []
     # Start at 1 because cfg.CONF expects the equivalent of sys.argv[1:]
@@ -150,6 +151,6 @@ def get_enforcer():
         conf_args.append(sys.argv[i])
         i += 1
 
-    cfg.CONF(conf_args, project='cloudkitty')
+    cfg.CONF(conf_args, project='pecan_demo')
     init()
     return _ENFORCER
