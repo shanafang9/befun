@@ -1,5 +1,41 @@
 
-[TOC]
+- [前言](#--)
+      - [内容主要用作个人学习总结，如有描述错误，欢迎指明](#------------------------)
+- [1](#1)
+- [服务入口](#----)
+- [服务加载](#----)
+  * [方式1：定义 setup.cfg](#--1----setupcfg)
+    + [setup.cfg](#setupcfg)
+    + [cloudkitty/api/app.py](#cloudkitty-api-apppy)
+  * [方式2：定义 api_paste.ini](#--2----api-pasteini)
+    + [api_paste.ini](#api-pasteini)
+    + [cloudkitty/api/app.py](#cloudkitty-api-apppy-1)
+- [构建组件 demo](#-----demo)
+- [2](#2)
+- [目录结构](#----)
+    + [第 1 层](#--1--)
+    + [第 2 层](#--2--)
+- [内部实现](#----)
+    + [接下来按加载顺序依次介绍](#------------)
+    + [#1 定义启动文件](#-1-------)
+    + [#2 配置 cfg](#-2----cfg)
+    + [#3 加载 cfg](#-3----cfg)
+    + [#4 Pecan 初始化](#-4-pecan----)
+    + [#5 视图&路由](#-5------)
+    + [#6 IDE 调试](#-6-ide---)
+- [3](#3)
+  * [部署](#--)
+    + [安装](#--)
+    + [建库](#--)
+    + [数据迁移](#----)
+    + [查看 command](#---command)
+    + [启动服务](#----)
+    + [请求](#--)
+    + [存储](#--)
+  * [Policy](#policy)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 # 前言
 
