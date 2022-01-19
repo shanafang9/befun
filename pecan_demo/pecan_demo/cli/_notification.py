@@ -19,7 +19,7 @@ def main():
     # 根据性能需求调整 worker 数
     workerNum = min(4, cpuNum)
     message_mgr = MessageManager()
-    for i in ['nova', 'neutron', 'cinder']:
+    for i in ['nova', ]:     # ['nova', 'neutron', 'cinder']
         sm.add(notification.NotificationServer, workers=workerNum, args=(conf, i, message_mgr))
         oslo_config_glue.setup(sm, conf)
     print "rabbitMQ listener is started..."
