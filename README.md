@@ -2,20 +2,20 @@
 - [前言](#--)
       - [内容主要用作个人学习总结，如有描述错误，欢迎指明](#------------------------)
 - [1](#1)
-- [服务入口](#----)
-- [服务加载](#----)
-  * [方式1：定义 setup.cfg](#--1----setupcfg)
-    + [setup.cfg](#setupcfg)
-    + [cloudkitty/api/app.py](#cloudkitty-api-apppy)
-  * [方式2：定义 api_paste.ini](#--2----api-pasteini)
-    + [api_paste.ini](#api-pasteini)
-    + [cloudkitty/api/app.py](#cloudkitty-api-apppy-1)
-- [构建组件 demo](#-----demo)
+  * [服务入口](#----)
+  * [服务加载](#----)
+    + [方式1：定义 setup.cfg](#--1----setupcfg)
+      - [setup.cfg](#setupcfg)
+      - [cloudkitty/api/app.py](#cloudkitty-api-apppy)
+    + [方式2：定义 api_paste.ini](#--2----api-pasteini)
+      - [api_paste.ini](#api-pasteini)
+      - [cloudkitty/api/app.py](#cloudkitty-api-apppy-1)
+  * [构建组件 demo](#-----demo)
 - [2](#2)
-- [目录结构](#----)
+  * [目录结构](#----)
     + [第 1 层](#--1--)
     + [第 2 层](#--2--)
-- [内部实现](#----)
+  * [内部实现](#----)
     + [接下来按加载顺序依次介绍](#------------)
     + [#1 定义启动文件](#-1-------)
     + [#2 配置 cfg](#-2----cfg)
@@ -60,7 +60,7 @@
 
 <br>
 
-# 服务入口
+## 服务入口
 
 接触过 OpenStack 的人都知道它有很多组件以及很多版本(这里以 cloudkitty-rocky 版为主)，在看组件的源码时，通常会以项目的 **setup.cfg** 文件入手<br>
 如下所示:
@@ -89,14 +89,14 @@
 <br>
 
 
-# 服务加载
+## 服务加载
 
 
 读过 setup.cfg 和 api_paste.ini ，可以发现启动服务有多种切入方式
 
-## 方式1：定义 setup.cfg
+### 方式1：定义 setup.cfg
 
-### setup.cfg
+#### setup.cfg
 
 ```
 [entry_points]
@@ -107,7 +107,7 @@ wsgi_scripts =
 # "wsgi_scripts" 代表这是一个 wsgi 的可执行脚本；以上述代码为例子，在 Linux 环境安装时，会在 /usr/bin 下生成一个名为 "cloudkitty-api" 的可执行文件；具体效果，大家可以在部署 OpenStack 环境时验证与查看
 ```
 
-### cloudkitty/api/app.py
+#### cloudkitty/api/app.py
 ```
 def build_wsgi_app(argv=None):
     service.prepare_service()
@@ -125,15 +125,15 @@ def load_app():
 ![cloudkitty-rocky-1](https://images.cnblogs.com/cnblogs_com/blogs/695346/galleries/2062349/o_211115034427_setup_cfg-build-wsgi-app.png "build-wsgi-app_1")
 
 
-## 方式2：定义 api_paste.ini
+### 方式2：定义 api_paste.ini
 <div style="height:auto !important;max-height:200px;overflow:scroll;overflow-x:hidden;">
 
-### api_paste.ini
+#### api_paste.ini
 ```
 [app:ck_api_v1]
 paste.app_factory = cloudkitty.api.app:app_factory
 ```
-### cloudkitty/api/app.py
+#### cloudkitty/api/app.py
 ```
 def app_factory(global_config, **local_conf):
     return setup_app()
@@ -190,7 +190,7 @@ return pecan.make_app()
 <br>
 <br>
 
-# 构建组件 demo
+## 构建组件 demo
 
 OpenStack 相关的第三方包，一般会涉及到以下部分
 
@@ -215,7 +215,7 @@ OpenStack 相关的第三方包，一般会涉及到以下部分
 本章节将构建整合&验证API
 
 
-# 目录结构
+## 目录结构
 
 ### 第 1 层
 ```
@@ -263,7 +263,7 @@ $ tree -L 1
 <br>
 <br>
 
-# 内部实现
+## 内部实现
 
 ### 接下来按加载顺序依次介绍
 
