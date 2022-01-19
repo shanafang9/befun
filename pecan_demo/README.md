@@ -8,6 +8,7 @@
 
 项目初始结构
 
+``` shell
 $ tree -L 4
 .
 |-- README.md
@@ -34,7 +35,7 @@ $ tree -L 4
 |   `-- service.py
 |-- setup.cfg
 `-- setup.py
-
+```
 
 
 
